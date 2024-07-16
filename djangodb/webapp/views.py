@@ -16,8 +16,20 @@ def join(request):
         if form.is_valid():
             form.save()
         else:
+            fname = request.POST['fname']
+            lname = request.POST['lname']
+            email = request.POST['email']
+            qmo_level = request.POST['qmo_level']
+            passwd = request.POST['passwd']
+            passwd2 = request.POST['passwd2']
             messages.success(request, 'There was an error in your form. Please try again...')
-            return redirect('join')
+            return render(request, 'join.html', {'fname':fname,
+                                                 'lname':lname,
+                                                 'email':email,
+                                                 'qmo_level':qmo_level,
+                                                 'passwd':passwd,
+                                                 'passwd2':passwd2,
+                                                 })
         messages.success(request, 'Your form has been Submitted Successfully!')
         return redirect('home')
     else:
